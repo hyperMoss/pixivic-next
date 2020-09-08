@@ -1,9 +1,15 @@
 import {replaceSmallImg} from '../../utils'
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Post({illustDetail, relateIllustList}) {
 
     return <div>
+        <Head>
+            <title>Pixivic</title>
+            <meta property="og:title" content={illustDetail.title} key="title" />
+            <meta property="og:description" content={illustDetail.caption} key="description" />
+        </Head>
         <main>
             <img style={{height: '200px', width: '200px'}} title={illustDetail.title} alt={illustDetail.caption}
                  src={illustDetail.src}/>
@@ -21,7 +27,7 @@ export default function Post({illustDetail, relateIllustList}) {
             <ul>{relateIllustList.map(i => (<li key={i.id}>
                 <img style={{height: '200px', width: '200px'}} title={i.title} alt={i.caption}
                      src={i.src}/>
-                <Link href={`/illusts/${i.id}`}>{i.title}</Link>
+                <Link key={i.id} href={`/illusts/${i.id}`}>{i.title}</Link>
                 <span>{i.artistPreView.name}</span>
                 <span>{i.caption}</span>
                 <ul>
